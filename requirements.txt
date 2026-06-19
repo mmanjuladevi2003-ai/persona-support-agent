@@ -1,6 +1,7 @@
-google-genai
 streamlit
-chromadb
-langchain
+google-generativeai
+chromadb==0.4.24
+langchain==0.1.20
 pypdf
 python-dotenv
+protobuf==4.25.3
