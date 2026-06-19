@@ -1,7 +1,8 @@
-from google import genai
+import google.generativeai as genai
 from src.config import GEMINI_API_KEY
 
-client = genai.Client(api_key=GEMINI_API_KEY)
+genai.configure(api_key=GEMINI_API_KEY)
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def classify_customer_persona(message):
     prompt = f"""
