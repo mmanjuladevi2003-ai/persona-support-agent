@@ -1,26 +1,14 @@
-import google.generativeai as genai
-from src.config import GEMINI_API_KEY
+def classify_customer_persona(query):
+    query = query.lower()
 
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+    if any(word in query for word in ["refund", "charged", "billing", "payment"]):
+        return "Billing Customer"
 
-def classify_customer_persona(message):
-    prompt = f"""
-Classify the user into ONE of these personas:
+    elif any(word in query for word in ["password", "login", "account"]):
+        return "Technical Support Customer"
 
-1. Technical Expert
-2. Frustrated User
-3. Business Executive
+    elif any(word in query for word in ["complaint", "unhappy", "issue"]):
+        return "Escalation Customer"
 
-Return ONLY the persona name.
-
-Message:
-{message}
-"""
-
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
-
-    return response.text.strip()
+    else:
+        return "General Customer"
